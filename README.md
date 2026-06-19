@@ -85,8 +85,8 @@ project/
 ### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
-cd <repository-folder>
+git clone <https://github.com/vitistatyagi/Sentiment_Classifier.git>
+cd Sentiment_Classifier
 ```
 
 ### 2. Create and Activate a Virtual Environment
