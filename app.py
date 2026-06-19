@@ -5,11 +5,15 @@ from classifier import analyze_senti, topic_classification
 def make_list(labs):
     return labs.split(',')
 
+#heading and subheading
+st.title("Sentiment Analysis and Topic Classification")
+st.subheader("Get the sentiment of your senetence and classify into labels.")
+
 #text box for sentence input
-sentence = st.text_area("Enter a sentence for analyzing")
+sentence = st.text_area("Enter a text you want to analyze")
 
 #text box for labels
-labels= st.text_area("Write your labels, sepearated by comma")
+labels= st.text_area("Write your labels, separated by comma", placeholder="technology, sports, politics, art")
 
 #button to submit and trigger function
 if st.button("Submit"):
