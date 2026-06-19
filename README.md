@@ -1,36 +1,209 @@
-## Hugging Face Sentiment/ Topic Classifier
+# Hugging Face Sentiment & Topic Classifier
 
-* This project encompasses sentiment analyses and topic classification using hugging face models. The final program is displayed beautifully via a streamlit web application.
+## Overview
 
-## What it does (sentiment + topic classification)
+This project performs both sentiment analysis and topic classification using pre-trained Hugging Face models. The functionality is wrapped inside an interactive Streamlit web application that allows users to enter text and instantly receive predictions along with visualizations.
 
-This project helps you put a sentiment on your entered text i.e POSITIVE/ NEGATIVE. On top of that it scores the labels you entered, with providing it a score and then present the findings in a bar chart. 
+The application demonstrates how transformer based NLP models can be integrated into a user-friendly interface for real-time text analysis.
 
-## Models used (with links)
+---
 
-This projects utilizes two models
-* Sentiment Analysis (distilbert-base-uncased-finetuned-sst-2-english)
-* Topic Classification (facebook/bart-large-mnli)
+## Features
 
-## How to run it locally
+* Sentiment Analysis (Positive / Negative)
+* Confidence scores for predictions
+* Zero-shot topic classification
+* Interactive Streamlit interface
+* Graphical visualization of model outputs
+* Support for custom topic labels
 
-To run this project on your system first 'git clone <repo-url>' from the github. Extract it and I have used VS Code for my project. Then run the requirements.txt to download all the required packages by cmd 'pip install -r requirements.txt'. Then from the terminal run the project with a cmd streamlit run app.py
+---
 
-## Example outputs (your screenshots go here)
+## Tech Stack
 
-To check the performance of my project I had it run some examples
-1. "The service was okay, nothing special but not bad either." shows a similar pattern with POSITIVE label and a ~93.3% score. Additionally we get to see how clearly the model identifies the labels and score them appropriately. 
-![Sentiment analysis example](screenshots/service_senti.png)
-![Sentiment analysis example](screenshots/service_labels.png)
-![Sentiment analysis example](screenshots/service_graph.png)
+* Python
+* Hugging Face Transformers
+* PyTorch
+* Streamlit
+* Pandas
+* Matplotlib
 
-To see the range and understanding of the model and test the zero shot classification we have used variety of examples to test our model. 
-1. "The cricket match went into a thrilling final over before India won." shows clear labeling i.e. sports: 0.876, entertainment: 0.117, health: 0.003, technology: 0.003, politics: 0.001. Thrilled to see the results
-![Sentiment analysis example](screenshots/cricket_eg.png)
-![Sentiment analysis example](screenshots/cricket_graph.png)
+---
 
+## Models Used
 
-## Known limitations (your neutral-sentiment observation goes here!)
+This project utilizes two pre-trained Hugging Face models:
 
-The model that we are using here is only trained on 2 labels which is positive and negative. So a sentence with ambiguous feelings also receives a strong score. E.g. "Honestly not sure how I feel about the ending of that movie." gets NEGATIVE label with ~99.7% score. This is a known limitation of the base sentiment model, not the app.
-![Sentiment analysis example](screenshots/movie_senti.png)
+### Sentiment Analysis
+
+* **distilbert-base-uncased-finetuned-sst-2-english**
+* Model Link: https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english
+
+### Topic Classification (Zero-Shot)
+
+* **facebook/bart-large-mnli**
+* Model Link: https://huggingface.co/facebook/bart-large-mnli
+
+These models are loaded through the Hugging Face Transformers library and used to perform sentiment analysis and zero-shot topic classification on user-provided text.
+
+---
+
+## How It Works
+
+### Sentiment Analysis
+
+The application predicts whether the entered text expresses a **POSITIVE** or **NEGATIVE** sentiment. Along with the prediction, it displays confidence scores.
+
+### Topic Classification
+
+Using zero-shot classification, the application categorizes text into user-defined topics without requiring additional model training. The predicted topics and their confidence scores are displayed in both textual and graphical formats.
+
+---
+
+## Project Structure
+
+```text
+project/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+│
+└── screenshots/
+    ├── service_senti.png
+    ├── service_labels.png
+    ├── service_graph.png
+    ├── cricket_eg.png
+    ├── cricket_graph.png
+    └── movie_senti.png
+```
+
+---
+
+## How to Run Locally
+
+### 1. Clone the Repository
+
+```bash
+git clone <repository-url>
+cd <repository-folder>
+```
+
+### 2. Create and Activate a Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+Windows:
+
+```bash
+.venv\Scripts\activate
+```
+
+Mac/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Launch the Streamlit App
+
+```bash
+streamlit run app.py
+```
+
+The application will open automatically in your browser.
+
+---
+
+## Example Outputs
+
+### Example 1: Sentiment Analysis
+
+Input:
+
+> "The service was okay, nothing special but not bad either."
+
+Result:
+
+* Predicted Sentiment: POSITIVE
+* Confidence Score: ~93.3%
+
+This example demonstrates how the model assigns a sentiment label along with confidence scores and visualizes the prediction through charts.
+
+![Sentiment Analysis](screenshots/service_senti.png)
+
+![Label Scores](screenshots/service_labels.png)
+
+![Bar Chart](screenshots/service_graph.png)
+
+---
+
+### Example 2: Topic Classification
+
+Input:
+
+> "The cricket match went into a thrilling final over before India won."
+
+Result:
+
+* Sports: 0.876
+* Entertainment: 0.117
+* Health: 0.003
+* Technology: 0.003
+* Politics: 0.001
+
+The model correctly identifies the text as sports-related with high confidence while assigning lower probabilities to unrelated categories.
+
+![Topic Classification](screenshots/cricket_eg.png)
+
+![Topic Classification Chart](screenshots/cricket_graph.png)
+
+---
+
+## Limitations
+
+The sentiment model used in this project is trained only on two labels:
+
+* POSITIVE
+* NEGATIVE
+
+As a result, text expressing neutral, mixed, or ambiguous emotions may still receive a highly confident positive or negative prediction.
+
+For example:
+
+> "Honestly not sure how I feel about the ending of that movie."
+
+The model predicts:
+
+* NEGATIVE
+* Confidence Score: ~99.7%
+
+This behavior is a limitation of the underlying sentiment model rather than the Streamlit application itself.
+
+![Limitation Example](screenshots/movie_senti.png)
+
+---
+
+## What I Learned
+
+Through this project, I gained hands-on experience with:
+
+* Hugging Face Transformers
+* Pre-trained NLP models
+* Sentiment analysis pipelines
+* Zero-shot classification
+* Streamlit application development
+* Model confidence score visualization
+* Integrating machine learning models into user-facing applications
+
+I also learned how to deploy transformer-based NLP workflows in an interactive environment while keeping the implementation lightweight and easy to use.
+
+---
